@@ -1,20 +1,20 @@
-package main
+package sha1
 
 import "testing"
 
-func BenchmarkLuhnSmall(b *testing.B) {
+func BenchmarkDigestSmall(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		Digest([]byte("123"))
 	}
 }
 
-func BenchmarkLuhnLarge(b *testing.B) {
+func BenchmarkDigestLarge(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		Digest([]byte("00123014764700968325001230147647009683250012301476470096832500123014764700968325"))
 	}
 }
 
-func BenchmarkLuhnSmallParallel(b *testing.B) {
+func BenchmarkDigestSmallParallel(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			Digest([]byte("123"))
@@ -22,7 +22,7 @@ func BenchmarkLuhnSmallParallel(b *testing.B) {
 	})
 }
 
-func BenchmarkLuhnLargeParallel(b *testing.B) {
+func BenchmarkDigestLargeParallel(b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			Digest([]byte("00123014764700968325001230147647009683250012301476470096832500123014764700968325"))
