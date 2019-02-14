@@ -1,4 +1,4 @@
-package main
+package sha1
 
 const (
 	BLOCK_SIZE  int = 16
@@ -35,6 +35,7 @@ func words_to_bytes(words []uint) []byte {
 	return r
 }
 
+// Digest returns SHA1 digest of given byte slice
 func Digest(message []byte) []byte {
 	var (
 		l uint   = uint(len(message) * 8)
