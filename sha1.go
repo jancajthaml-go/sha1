@@ -11,12 +11,10 @@ func bytes_to_words(bytes []byte) []uint {
 		l     uint   = uint(len(bytes) * 8)
 		words []uint = make([]uint, 1+((l+64>>9)<<4)+15)
 	)
-
 	for _, b := range bytes {
 		words[i>>5] |= (uint(b) << (24 - (i - (i/32)*32)))
 		i += 8
 	}
-
 	return words
 }
 
@@ -24,14 +22,12 @@ func words_to_bytes(words []uint) []byte {
 	var (
 		i int
 		j int    = len(words) * 32
-		r []byte = make([]byte, len(words)*4)
+		r []byte = make([]byte, len(words) * 4)
 	)
-
 	for b := 0; b < j; b += 8 {
 		r[i] = byte((words[b>>5] >> uint(24-(b-(b/32)*32))) & 0xFF)
 		i++
 	}
-
 	return r
 }
 
@@ -50,7 +46,7 @@ func Digest(message []byte) []byte {
 		i  int
 	)
 
-	m[l>>5] |= 0x80 << (24 - (l - (l/32)*32))
+	m[l>>5] |= 0x80 << (24 - (l - (l/32) * 32))
 	m[((l+64>>9)<<4)+15] = l
 
 loop:
